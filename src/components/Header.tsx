@@ -10,7 +10,9 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import Link from "next/link"
-import { Grid2X2 } from 'lucide-react'
+import {SignedIn, SignedOut, SignInButton} from '@clerk/nextjs'
+import { neobrutalism } from '@clerk/themes'
+
 
 const courses =[
   {
@@ -51,7 +53,7 @@ const Header = () => {
     <div className="p-4 max-w-7xl flex items-center justify-between mx-auto">
       <div className="flex items-center gap-2">
         <Image src={'/logo.png'} alt="logo" width={40} height={40} />
-        <h2 className="text-4xl font-medium ">CodeQuest</h2>
+        <h2 className="text-4xl font-medium font-game">CodeQuest</h2>
       </div>
       <div className="flex items-center gap-2">
         <NavigationMenu>
@@ -88,7 +90,18 @@ const Header = () => {
         </NavigationMenu>
       </div>
       <div>
-        <Button variant={"outline"}>Sign In</Button>
+        <SignedIn>
+          <Button variant="pixel" asChild>
+          <Link href="/dashboard">Dashboard</Link>
+        </Button>
+        </SignedIn>
+        <SignedOut>
+          <Button variant="pixel" asChild>
+          <SignInButton appearance={{ theme: neobrutalism }} mode="modal">
+              Sign In
+        </SignInButton>
+        </Button>
+        </SignedOut>
       </div>
     </div>
   )
